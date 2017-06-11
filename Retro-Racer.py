@@ -29,6 +29,8 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = True
 
+    gameDisplay.fill(white)
+    car(x, y)
     pygame.display.update()
     clock.tick(60)
 
