@@ -25,7 +25,7 @@ def car(x, y):
 
 def game_loop():
     x = (display_width * 0.45)
-    y = (display_height * 0.8)
+    y = (display_height * 0.84)
     x_change = 0
 
     game_exit = False
