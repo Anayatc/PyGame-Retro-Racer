@@ -55,8 +55,8 @@ def game_loop():
     obstacle_start_x = random.randrange(0, display_width)
     obstacle_start_y = -600
     obstacle_speed = 7
-    obstacle_width = random.randint(50, 100)
-    obstacle_height = random.randint(50, 100)
+    obstacle_width = random.randint(50, 75)
+    obstacle_height = random.randint(50, 75)
 
     game_exit = False
 
@@ -91,7 +91,7 @@ def game_loop():
             obstacle_start_x = random.randrange(0, display_width)
 
         pygame.display.update()
-        clock.tick(240)
+        clock.tick(120)
 
 game_loop()
 pygame.quit()
