@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 pygame.init()
 
@@ -9,6 +10,7 @@ display_height = 600
 
 black = (0, 0, 0)
 white = (255, 255, 255)
+brown = (89, 58, 13)
 car_width = 50
 
 # window construction
@@ -18,8 +20,10 @@ clock = pygame.time.Clock()
 
 carImg = pygame.image.load('racecar.png')
 
+def obstacles(obstacle_x, obstacle_y, obstacle_w, obstacle_h, color):
+    pygame.draw.rect(gameDisplay, color, [obstacle_x, obstacle_y, obstacle_w, obstacle_h])
 
-# drawing the car to window
+
 def car(x, y):
     gameDisplay.blit(carImg, (x, y))
 
@@ -30,7 +34,7 @@ def text_objects(text, font):
 
 
 def message_display(text):
-    large_text = pygame.font.Font('freesansbold.ttf', 115)
+    large_text = pygame.font.Font('freesansbold.ttf', 80)
     text_surface, text_rect = text_objects(text, large_text)
     text_rect.center = ((display_width / 2), (display_height / 2))
     gameDisplay.blit(text_surface, text_rect)
@@ -47,6 +51,12 @@ def game_loop():
     x = (display_width * 0.45)
     y = (display_height * 0.84)
     x_change = 0
+
+    obstacle_start_x = random.randrange(0, display_width)
+    obstacle_start_y = -600
+    obstacle_speed = 7
+    obstacle_width = random.randint(50, 100)
+    obstacle_height = random.randint(50, 100)
 
     game_exit = False
 
@@ -69,13 +79,15 @@ def game_loop():
 
         x += x_change
         gameDisplay.fill(white)
+        obstacles(obstacle_start_x, obstacle_start_y, obstacle_width, obstacle_height, brown)
+        obstacle_start_y += obstacle_speed
         car(x, y)
 
         if x > display_width - car_width or x < 0:
             crash()
 
         pygame.display.update()
-        clock.tick(120)
+        clock.tick(240)
 
 game_loop()
 pygame.quit()
