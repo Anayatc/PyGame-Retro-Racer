@@ -86,6 +86,10 @@ def game_loop():
         if x > display_width - car_width or x < 0:
             crash()
 
+        if obstacle_start_y > display_height:
+            obstacle_start_y = 0 - obstacle_height
+            obstacle_start_x = random.randrange(0, display_width)
+
         pygame.display.update()
         clock.tick(240)
 
