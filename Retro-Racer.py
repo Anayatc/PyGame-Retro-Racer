@@ -8,6 +8,7 @@ display_height = 600
 
 black = (0, 0, 0)
 white = (255, 255, 255)
+car_width = 50
 
 # window construction
 gameDisplay = pygame.display.set_mode((display_width, display_height))
@@ -48,6 +49,10 @@ def game_loop():
         x += x_change
         gameDisplay.fill(white)
         car(x, y)
+
+        if x > display_width - car_width or x < 0:
+            game_exit = True
+
         pygame.display.update()
         clock.tick(120)
 
