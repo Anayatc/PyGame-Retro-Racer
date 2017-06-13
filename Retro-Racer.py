@@ -17,8 +17,8 @@ car_width = 50
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Retro Racer')
 clock = pygame.time.Clock()
-
 carImg = pygame.image.load('racecar.png')
+
 
 def obstacles(obstacle_x, obstacle_y, obstacle_w, obstacle_h, color):
     pygame.draw.rect(gameDisplay, color, [obstacle_x, obstacle_y, obstacle_w, obstacle_h])
@@ -90,8 +90,12 @@ def game_loop():
             obstacle_start_y = 0 - obstacle_height
             obstacle_start_x = random.randrange(0, display_width)
 
+        if y < obstacle_start_y + obstacle_height:
+            if x > obstacle_start_x and x < obstacle_start_x + obstacle_width or x + car_width > obstacle_start_x and x + car_width < obstacle_start_x + obstacle_width:
+                crash()
+
         pygame.display.update()
-        clock.tick(120)
+        clock.tick(220)
 
 game_loop()
 pygame.quit()
