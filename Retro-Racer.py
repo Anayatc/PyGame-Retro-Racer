@@ -20,6 +20,12 @@ clock = pygame.time.Clock()
 carImg = pygame.image.load('racecar.png')
 
 
+def obstacles_dodged(count):
+    font = pygame.font.SysFont(None, 25)
+    text = font.render("Dodged:" +str(count), True, black)
+    gameDisplay.blit(text, (1,1))
+
+
 def obstacles(obstacle_x, obstacle_y, obstacle_w, obstacle_h, color):
     pygame.draw.rect(gameDisplay, color, [obstacle_x, obstacle_y, obstacle_w, obstacle_h])
 
@@ -57,6 +63,7 @@ def game_loop():
     obstacle_speed = 7
     obstacle_width = random.randint(50, 75)
     obstacle_height = random.randint(50, 75)
+    dodged = 0
 
     game_exit = False
 
@@ -82,6 +89,7 @@ def game_loop():
         obstacles(obstacle_start_x, obstacle_start_y, obstacle_width, obstacle_height, brown)
         obstacle_start_y += obstacle_speed
         car(x, y)
+        obstacles_dodged(dodged)
 
         if x > display_width - car_width or x < 0:
             crash()
@@ -89,9 +97,10 @@ def game_loop():
         if obstacle_start_y > display_height:
             obstacle_start_y = 0 - obstacle_height
             obstacle_start_x = random.randrange(0, display_width)
+            dodged += 1
 
         if y < obstacle_start_y + obstacle_height:
-            if x > obstacle_start_x and x < obstacle_start_x + obstacle_width or x + car_width > obstacle_start_x and x + car_width < obstacle_start_x + obstacle_width:
+            if obstacle_start_x < x < obstacle_start_x + obstacle_width or obstacle_start_x < x + car_width < obstacle_start_x + obstacle_width:
                 crash()
 
         pygame.display.update()
