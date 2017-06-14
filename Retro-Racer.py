@@ -98,6 +98,7 @@ def game_loop():
             obstacle_start_y = 0 - obstacle_height
             obstacle_start_x = random.randrange(0, display_width)
             dodged += 1
+            obstacle_speed += 1
 
         if y < obstacle_start_y + obstacle_height:
             if obstacle_start_x < x < obstacle_start_x + obstacle_width or obstacle_start_x < x + car_width < obstacle_start_x + obstacle_width:
