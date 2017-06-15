@@ -18,6 +18,8 @@ gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Retro Racer')
 clock = pygame.time.Clock()
 carImg = pygame.image.load('racecar.png')
+bgImg = pygame.image.load('bg.png')
+
 
 
 def obstacles_dodged(count):
@@ -86,6 +88,7 @@ def game_loop():
 
         x += x_change
         gameDisplay.fill(white)
+        gameDisplay.blit(bgImg, (0, 0))
         obstacles(obstacle_start_x, obstacle_start_y, obstacle_width, obstacle_height, brown)
         obstacle_start_y += obstacle_speed
         car(x, y)
